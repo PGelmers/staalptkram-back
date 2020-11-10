@@ -1,19 +1,29 @@
 package com.martkplaats.backend.controllers;
 
 import com.martkplaats.backend.model.Account;
+import com.martkplaats.backend.model.User;
 import com.martkplaats.backend.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AccountController {
 
     @Autowired
-    AccountRepository loginRepository;
+    AccountRepository accountRepository;
 
-    @PostMapping("/login")
-    void save(Account login) {
-        loginRepository.save(login);
+    @PostMapping("/account")
+    int save(@RequestBody Account account) {
+        accountRepository.save(account);
+        return account.getId();
     }
+
+//    @GetMapping("/login")
+//    User login(@RequestBody int id) {
+//        accountRepository.findById(id);
+//        // TODO: Check username and password
+//    }
 }
