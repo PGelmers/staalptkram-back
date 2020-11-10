@@ -21,9 +21,4 @@ public class ProductController {
     Iterable<Product> findALl() {
         return productRepository.findAll();
     }
-
-    @PutMapping("/product")
-    Product update(@RequestBody Product product) {
-        return productRepository.save(product);
-    }
 }

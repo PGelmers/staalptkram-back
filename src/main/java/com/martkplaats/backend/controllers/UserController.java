@@ -21,9 +21,4 @@ public class UserController {
     Iterable<User> findALl() {
         return userRepository.findAll();
     }
-
-    @PutMapping("/user")
-    User update(@RequestBody User user) {
-        return userRepository.save(user);
-    }
 }

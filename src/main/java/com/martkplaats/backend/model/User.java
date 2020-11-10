@@ -16,27 +16,17 @@ public class User {
     private String telephone;
     private Date registration;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Product> products;
-
     public User(String firstName, String surname, String email, String telephone, Date registration) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
         this.registration = registration;
+
     }
 
     public User() {
 
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public int getId() {

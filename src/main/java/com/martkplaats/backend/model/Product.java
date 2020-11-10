@@ -1,5 +1,7 @@
 package com.martkplaats.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
