@@ -21,9 +21,10 @@ public class AccountController {
         return account.getId();
     }
 
-//    @GetMapping("/login")
-//    User login(@RequestBody int id) {
-//        accountRepository.findById(id);
-//        // TODO: Check username and password
-//    }
+    @GetMapping("/login")
+    User login(@RequestBody String username, String password) {
+        Account account = accountRepository.findByUsername(username);
+        // TODO: Check username and password
+        return account.getUser();
+    }
 }
