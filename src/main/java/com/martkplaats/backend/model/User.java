@@ -1,8 +1,7 @@
 package com.martkplaats.backend.model;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 public class User {
@@ -14,9 +13,9 @@ public class User {
     private String surname;
     private String email;
     private String telephone;
-    private Date registration;
+    private LocalDate registration = LocalDate.now();
 
-    public User(String firstName, String surname, String email, String telephone, Date registration) {
+    public User(String firstName, String surname, String email, String telephone, LocalDate registration) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
@@ -69,11 +68,11 @@ public class User {
         this.telephone = telephone;
     }
 
-    public Date getRegistration() {
+    public LocalDate getRegistration() {
         return registration;
     }
 
-    public void setRegistration(Date registration) {
+    public void setRegistration(LocalDate registration) {
         this.registration = registration;
     }
 }
