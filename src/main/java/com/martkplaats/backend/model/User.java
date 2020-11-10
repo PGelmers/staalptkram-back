@@ -21,7 +21,6 @@ public class User {
         this.email = email;
         this.telephone = telephone;
         this.registration = registration;
-
     }
 
     public User() {
