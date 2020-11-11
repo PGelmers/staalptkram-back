@@ -21,4 +21,9 @@ public class ProductController {
     Iterable<Product> findALl() {
         return productRepository.findAll();
     }
+
+    @DeleteMapping("/product/{id}")
+    void delete(@PathVariable int id) {
+        productRepository.deleteById(id);
+    }
 }
