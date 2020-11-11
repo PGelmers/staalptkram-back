@@ -19,10 +19,14 @@ public class AccountController {
         return account.getId();
     }
 
-    @GetMapping("/login")
-    User login(@RequestBody String username, String password) {
-        Account account = accountRepository.findByUsername(username);
+    @PostMapping("/login")
+    User login(@RequestBody Account accountFromFront) {
+        Account account = accountRepository.findByUsername(accountFromFront.getUsername());
         // TODO: Check username and password
-        return account.getUser();
+        if (account == null) {
+            return new User();
+        } else {
+            return account.getUser();
+        }
     }
 }
