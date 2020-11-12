@@ -5,6 +5,8 @@ import com.martkplaats.backend.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*")
 public class ProductController {
@@ -26,4 +28,7 @@ public class ProductController {
     void delete(@PathVariable int id) {
         productRepository.deleteById(id);
     }
+
+    @PostMapping("/product/{id}")
+    Optional<Product> getProduct(@PathVariable int id) { return productRepository.findById(id); }
 }
