@@ -17,7 +17,7 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/chat")
+    @MessageMapping("/message")
     public void sendMessage(@RequestBody User receiver, Message message) {
         simpMessagingTemplate.convertAndSend("/chatroom" + receiver, message);
     }

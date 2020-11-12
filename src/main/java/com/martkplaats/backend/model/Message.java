@@ -8,13 +8,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id_sender", nullable = false)
-    User userSender;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id_receiver)", nullable = false)
-    User userReceiver;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id_sender", nullable = false)
+//    User userSender;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id_receiver)", nullable = false)
+//    User userReceiver;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chat_id", nullable = false)
@@ -22,12 +22,17 @@ public class Message {
 
     String message;
 
-    public Message(User userSender, User userReceiver, Chat chat, String message) {
-        this.userSender = userSender;
-        this.userReceiver = userReceiver;
+    public Message(Chat chat, String message) {
         this.chat = chat;
         this.message = message;
     }
+
+    //    public Message(User userSender, User userReceiver, Chat chat, String message) {
+//        this.userSender = userSender;
+//        this.userReceiver = userReceiver;
+//        this.chat = chat;
+//        this.message = message;
+//    }
 
     public Message() {
 
@@ -49,21 +54,21 @@ public class Message {
         this.id = id;
     }
 
-    public User getUserSender() {
-        return userSender;
-    }
-
-    public void setUserSender(User userSender) {
-        this.userSender = userSender;
-    }
-
-    public User getUserReceiver() {
-        return userReceiver;
-    }
-
-    public void setUserReceiver(User userReceiver) {
-        this.userReceiver = userReceiver;
-    }
+//    public User getUserSender() {
+//        return userSender;
+//    }
+//
+//    public void setUserSender(User userSender) {
+//        this.userSender = userSender;
+//    }
+//
+//    public User getUserReceiver() {
+//        return userReceiver;
+//    }
+//
+//    public void setUserReceiver(User userReceiver) {
+//        this.userReceiver = userReceiver;
+//    }
 
     public String getMessage() {
         return message;
