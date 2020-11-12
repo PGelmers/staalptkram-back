@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    Iterable<User> findALl() {
+    Iterable<User> findAll() {
         return userRepository.findAll();
     }
 }
