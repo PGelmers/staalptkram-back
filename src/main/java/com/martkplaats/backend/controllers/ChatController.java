@@ -1,13 +1,9 @@
 package com.martkplaats.backend.controllers;
 
-import com.martkplaats.backend.model.Message;
-import com.martkplaats.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,8 +13,9 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/message")
-    public void sendMessage(@RequestBody User receiver, Message message) {
-        simpMessagingTemplate.convertAndSend("/chatroom" + receiver, message);
+    @MessageMapping("/send/message")
+    public void sendMessage(String message) {
+        System.out.print(message);
+        simpMessagingTemplate.convertAndSendToUser("20", "/queue/messages", message);
     }
 }
