@@ -1,41 +1,61 @@
 package com.martkplaats.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id_sender", nullable = false)
-//    User userSender;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id_receiver)", nullable = false)
-//    User userReceiver;
+    private int idSender;
+    private int idReceiver;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "chat_id", nullable = false)
-    Chat chat;
+    @JsonBackReference(value = "chat")
+    private Chat chat;
 
-    String message;
+    private String message;
+    private Date timestamp;
 
-    public Message(Chat chat, String message) {
+    public Message(int idSender, int idReceiver, Chat chat, String message, Date timestamp) {
+        this.idSender = idSender;
+        this.idReceiver = idReceiver;
         this.chat = chat;
         this.message = message;
+        this.timestamp = timestamp;
     }
-
-    //    public Message(User userSender, User userReceiver, Chat chat, String message) {
-//        this.userSender = userSender;
-//        this.userReceiver = userReceiver;
-//        this.chat = chat;
-//        this.message = message;
-//    }
 
     public Message() {
 
+    }
+
+    public int getIdSender() {
+        return idSender;
+    }
+
+    public void setIdSender(int idSender) {
+        this.idSender = idSender;
+    }
+
+    public int getIdReceiver() {
+        return idReceiver;
+    }
+
+    public void setIdReceiver(int idReceiver) {
+        this.idReceiver = idReceiver;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Chat getChat() {
@@ -54,22 +74,6 @@ public class Message {
         this.id = id;
     }
 
-//    public User getUserSender() {
-//        return userSender;
-//    }
-//
-//    public void setUserSender(User userSender) {
-//        this.userSender = userSender;
-//    }
-//
-//    public User getUserReceiver() {
-//        return userReceiver;
-//    }
-//
-//    public void setUserReceiver(User userReceiver) {
-//        this.userReceiver = userReceiver;
-//    }
-
     public String getMessage() {
         return message;
     }
@@ -77,4 +81,6 @@ public class Message {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }

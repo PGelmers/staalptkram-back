@@ -1,8 +1,11 @@
 package com.martkplaats.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Chat {
@@ -22,6 +25,10 @@ public class Chat {
 
     String userSellerName;
     String userBuyerName;
+
+    @OneToMany(mappedBy = "chat")
+    @JsonManagedReference(value = "chat")
+    List<Message> messages = new ArrayList<>();
 
     public Chat(User userSeller, User userBuyer) {
         this.userSeller = userSeller;
@@ -73,11 +80,11 @@ public class Chat {
         this.id = id;
     }
 
-//    public List<Message> getMessages() {
-//        return messages;
-//    }
-//
-//    public void setMessages(List<Message> messages) {
-//        this.messages = messages;
-//    }
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }
