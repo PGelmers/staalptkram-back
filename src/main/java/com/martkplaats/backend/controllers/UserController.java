@@ -16,15 +16,15 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping("/user")
-    User save(@RequestBody User user) {
+    public User save(@RequestBody User user) {
         return userRepository.save(user);
     }
 
     @PostMapping("/user/{id}")
-    Optional<User> getUserById(@PathVariable int id) { return userRepository.findById(id); }
+    public Optional<User> getUserById(@PathVariable int id) { return userRepository.findById(id); }
 
     @GetMapping("/users")
-    Iterable<User> findAll() {
+    public Iterable<User> findAll() {
         return userRepository.findAll();
     }
 }
