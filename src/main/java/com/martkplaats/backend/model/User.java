@@ -103,4 +103,5 @@ public class User {
     public void setRegistration(LocalDate registration) {
         this.registration = registration;
     }
+
 }
