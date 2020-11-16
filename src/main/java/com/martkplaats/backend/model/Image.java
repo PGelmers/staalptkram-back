@@ -10,16 +10,18 @@ public class Image {
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    // Deze ID dan opslaan in het Item object
 
     @Column(name="name")
     private String name;
+    // Dit eventueel veranderen naar een unieke random code
 
     @Column(name="type")
     private String type;
 
     //image bytes can have large lengths so we specify a value which is more than the default length for picByte column
     //More or less length = 40.000 for an image of 40kB
-    @Column(name = "picByte", length = 100000)
+    @Column(name = "picByte", length = 100_000)
     private byte[] picByte;
 
     public Image() {

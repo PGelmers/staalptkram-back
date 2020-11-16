@@ -18,23 +18,33 @@ import java.util.zip.Inflater;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "image")
-public class ImageController {	@Autowired
-ImageRepository imageRepository;	@PostMapping("/upload")
-public ResponseEntity.BodyBuilder uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {		System.out.println("Original Image Byte Size - " + file.getBytes().length);
-    Image img = new Image(file.getOriginalFilename(), file.getContentType(),
-            compressBytes(file.getBytes()));
-    imageRepository.save(img);
-    return ResponseEntity.status(HttpStatus.OK);
-}	@GetMapping(path = { "/get/{imageName}" })
-public Image getImage(@PathVariable("imageName") String imageName) throws IOException {		final Optional<Image> retrievedImage = imageRepository.findByName(imageName);
-    Image img = new Image(retrievedImage.get().getName(), retrievedImage.get().getType(),
-            decompressBytes(retrievedImage.get().getPicByte()));
-    return img;
-}	// compress the image bytes before storing it in the database
+public class ImageController {
+
+    @Autowired
+    ImageRepository imageRepository;
+
+    @PostMapping("/upload")
+    public ResponseEntity.BodyBuilder uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+        System.out.println("Original Image Byte Size - " + file.getBytes().length);
+        Image img = new Image(file.getOriginalFilename(), file.getContentType(),
+                compressBytes(file.getBytes()));
+        imageRepository.save(img);
+        return ResponseEntity.status(HttpStatus.OK);
+    }
+
+    @GetMapping(path = {"/get/{imageID}"})
+    public Image getImage(@PathVariable("imageID") long imageID) throws IOException {
+        final Optional<Image> retrievedImage = imageRepository.findById(imageID);
+        Image img = new Image(retrievedImage.get().getName(), retrievedImage.get().getType(),
+                decompressBytes(retrievedImage.get().getPicByte()));
+        return img;
+    }    // compress the image bytes before storing it in the database
+
     public static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
-        deflater.finish();		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        deflater.finish();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
         byte[] buffer = new byte[1024];
         while (!deflater.finished()) {
             int count = deflater.deflate(buffer);
@@ -44,8 +54,10 @@ public Image getImage(@PathVariable("imageName") String imageName) throws IOExce
             outputStream.close();
         } catch (IOException e) {
         }
-        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);		return outputStream.toByteArray();
-    }	// uncompress the image bytes before returning it to the angular application
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+        return outputStream.toByteArray();
+    }    // uncompress the image bytes before returning it to the angular application
+
     public static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
