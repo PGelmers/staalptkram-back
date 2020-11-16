@@ -19,6 +19,9 @@ public class User {
     private String surname;
     private String email;
     private String telephone;
+    private String straatnaam;
+    private String huisnummer;
+    private String plaatsnaam;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -29,11 +32,15 @@ public class User {
     @JsonManagedReference(value = "buyer")
     List<Chat> chatsBuyer = new ArrayList<Chat>();
 
-    public User(String firstName, String surname, String email, String telephone) {
+    public User(String firstName, String surname, String email, String telephone,
+                String straatnaam, String huisnummer, String plaatsnaam) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
+        this.straatnaam = straatnaam;
+        this.huisnummer = huisnummer;
+        this.plaatsnaam = plaatsnaam;
     }
 
     public User() {
@@ -104,4 +111,27 @@ public class User {
         this.registration = registration;
     }
 
+    public String getStraatnaam() {
+        return straatnaam;
+    }
+
+    public void setStraatnaam(String straatnaam) {
+        this.straatnaam = straatnaam;
+    }
+
+    public String getHuisnummer() {
+        return huisnummer;
+    }
+
+    public void setHuisnummer(String huisnummer) {
+        this.huisnummer = huisnummer;
+    }
+
+    public String getPlaatsnaam() {
+        return plaatsnaam;
+    }
+
+    public void setPlaatsnaam(String plaatsnaam) {
+        this.plaatsnaam = plaatsnaam;
+    }
 }
