@@ -3,6 +3,8 @@ package com.martkplaats.backend.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -14,6 +16,10 @@ public class Product {
     private double price;
     private String description;
     private Category category;
+
+    @OneToMany
+    @OrderColumn(name = "pos")
+    private Image[] images = new Image[0];
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
@@ -80,5 +86,22 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Image[] getImages() {
+        return images;
+    }
+
+    public void setImages(Image[] images) {
+        this.images = images;
+    }
+
+    public void addImage(Image image){
+        Image[] newImgArray = new Image[images.length + 1];
+        for (int i = 0; i<images.length; i++){
+            newImgArray[i] = images[i];
+        }
+        newImgArray[images.length] = image;
+        images = newImgArray;
     }
 }
