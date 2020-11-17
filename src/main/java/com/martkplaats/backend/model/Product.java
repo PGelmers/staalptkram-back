@@ -19,7 +19,7 @@ public class Product {
 
     @OneToMany
     @OrderColumn(name = "pos")
-    private Image[] images = new Image[0];
+    private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
@@ -88,20 +88,15 @@ public class Product {
         this.category = category;
     }
 
-    public Image[] getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(Image[] images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
     public void addImage(Image image){
-        Image[] newImgArray = new Image[images.length + 1];
-        for (int i = 0; i<images.length; i++){
-            newImgArray[i] = images[i];
-        }
-        newImgArray[images.length] = image;
-        images = newImgArray;
+        this.images.add(image);
     }
 }
