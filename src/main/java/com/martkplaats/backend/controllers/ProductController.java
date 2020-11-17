@@ -29,6 +29,6 @@ public class ProductController {
         productRepository.deleteById(id);
     }
 
-    @PostMapping("/product/{id}")
+    @GetMapping("/product/{id}")
     Optional<Product> getProduct(@PathVariable int id) { return productRepository.findById(id); }
 }
