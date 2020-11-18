@@ -1,8 +1,6 @@
 package com.martkplaats.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,9 +17,8 @@ public class User {
     private String surname;
     private String email;
     private String telephone;
-    private String straatnaam;
-    private String huisnummer;
-    private String plaatsnaam;
+    private String latitude;
+    private String longitude;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -33,14 +30,13 @@ public class User {
     List<Chat> chatsBuyer = new ArrayList<Chat>();
 
     public User(String firstName, String surname, String email, String telephone,
-                String straatnaam, String huisnummer, String plaatsnaam) {
+                String latitude, String longitude, String plaatsnaam) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
-        this.straatnaam = straatnaam;
-        this.huisnummer = huisnummer;
-        this.plaatsnaam = plaatsnaam;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public User() {
@@ -111,27 +107,19 @@ public class User {
         this.registration = registration;
     }
 
-    public String getStraatnaam() {
-        return straatnaam;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setStraatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
+    public void setLatitude(String straatnaam) {
+        this.latitude = straatnaam;
     }
 
-    public String getHuisnummer() {
-        return huisnummer;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setHuisnummer(String huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-
-    public String getPlaatsnaam() {
-        return plaatsnaam;
-    }
-
-    public void setPlaatsnaam(String plaatsnaam) {
-        this.plaatsnaam = plaatsnaam;
+    public void setLongitude(String huisnummer) {
+        this.longitude = huisnummer;
     }
 }
