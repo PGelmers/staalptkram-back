@@ -23,9 +23,6 @@ public class Chat {
     @JsonBackReference(value = "buyer")
     User userBuyer;
 
-    String userSellerName;
-    String userBuyerName;
-
     @OneToMany(mappedBy = "chat")
     @JsonManagedReference(value = "chat")
     List<Message> messages = new ArrayList<>();
@@ -33,27 +30,9 @@ public class Chat {
     public Chat(User userSeller, User userBuyer) {
         this.userSeller = userSeller;
         this.userBuyer = userBuyer;
-        this.userSellerName = userSeller.getFirstName();
-        this.userBuyerName = userBuyer.getFirstName();
     }
 
     public Chat() {
-    }
-
-    public String getUserSellerName() {
-        return userSellerName;
-    }
-
-    public void setUserSellerName(String userSellerName) {
-        this.userSellerName = userSellerName;
-    }
-
-    public String getUserBuyerName() {
-        return userBuyerName;
-    }
-
-    public void setUserBuyerName(String userBuyerName) {
-        this.userBuyerName = userBuyerName;
     }
 
     public User getUserSeller() {

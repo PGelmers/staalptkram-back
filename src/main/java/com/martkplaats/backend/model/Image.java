@@ -1,6 +1,7 @@
 package com.martkplaats.backend.model;
 
 import javax.persistence.*;
+import java.sql.Blob;
 
 @Entity
 @Table(name = "image_table")
@@ -21,7 +22,8 @@ public class Image {
 
     //image bytes can have large lengths so we specify a value which is more than the default length for picByte column
     //More or less length = 40.000 for an image of 40kB
-    @Column(name = "picByte", length = 100_000)
+    @Lob()
+    @Column(name = "picByte", columnDefinition = "BLOB", length = 10_000_000)
     private byte[] picByte;
 
     public Image() {

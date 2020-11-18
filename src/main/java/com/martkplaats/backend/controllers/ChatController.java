@@ -1,5 +1,6 @@
 package com.martkplaats.backend.controllers;
 
+import com.martkplaats.backend.model.Chat;
 import com.martkplaats.backend.model.Message;
 import com.martkplaats.backend.repositories.ChatRepository;
 import com.martkplaats.backend.repositories.MessageRepository;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,9 +25,14 @@ public class ChatController {
     @Autowired
     private MessageRepository messageRepository;
 
+    @PostMapping("/chat")
+    int save(@RequestBody Chat chat) {
+        return chatRepository.save(chat).getId();
+    }
+
     @MessageMapping("/send/message")
     public void sendMessage(Message message) {
-        System.out.print(message.getMessage());
-        simpMessagingTemplate.convertAndSendToUser(Integer.toString(message.getChat().getId()), "/queue/messages", message.getMessage());
+        messageRepository.save(message);
+        simpMessagingTemplate.convertAndSendToUser(Integer.toString(message.getChat().getId()), "/queue/messages", message);
     }
 }
