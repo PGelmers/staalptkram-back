@@ -1,8 +1,6 @@
 package com.martkplaats.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +17,8 @@ public class User {
     private String surname;
     private String email;
     private String telephone;
+    private Double latitude;
+    private Double longitude;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -29,11 +29,14 @@ public class User {
     @JsonManagedReference(value = "buyer")
     List<Chat> chatsBuyer = new ArrayList<Chat>();
 
-    public User(String firstName, String surname, String email, String telephone) {
+    public User(String firstName, String surname, String email, String telephone,
+                Double latitude, Double longitude) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public User() {
@@ -104,4 +107,19 @@ public class User {
         this.registration = registration;
     }
 
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double straatnaam) {
+        this.latitude = straatnaam;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double huisnummer) {
+        this.longitude = huisnummer;
+    }
 }
