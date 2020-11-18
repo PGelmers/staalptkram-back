@@ -17,8 +17,8 @@ public class User {
     private String surname;
     private String email;
     private String telephone;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -30,7 +30,7 @@ public class User {
     List<Chat> chatsBuyer = new ArrayList<Chat>();
 
     public User(String firstName, String surname, String email, String telephone,
-                String latitude, String longitude, String plaatsnaam) {
+                Double latitude, Double longitude) {
         this.firstName = firstName;
         this.surname = surname;
         this.email = email;
@@ -107,19 +107,19 @@ public class User {
         this.registration = registration;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String straatnaam) {
+    public void setLatitude(Double straatnaam) {
         this.latitude = straatnaam;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String huisnummer) {
+    public void setLongitude(Double huisnummer) {
         this.longitude = huisnummer;
     }
 }
