@@ -8,12 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.zip.DataFormatException;
-import java.util.zip.Deflater;
-import java.util.zip.Inflater;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -50,6 +46,8 @@ public class ImageController {
                 retrievedImage.get().getPicByte());
         return img;
     }
+
+
 //    public static byte[] compressBytes(byte[] data) {
 //        Deflater deflater = new Deflater();
 //        deflater.setInput(data);
@@ -84,4 +82,6 @@ public class ImageController {
 //        }
 //        return outputStream.toByteArray();
 //    }
+
+
 }
