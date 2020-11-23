@@ -19,6 +19,9 @@ public class User {
     private String telephone;
     private Double latitude;
     private Double longitude;
+    private String straatnaam;
+    private String huisnummer;
+    private String plaatsnaam;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -111,15 +114,39 @@ public class User {
         return latitude;
     }
 
-    public void setLatitude(Double straatnaam) {
-        this.latitude = straatnaam;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double huisnummer) {
-        this.longitude = huisnummer;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getStraatnaam() {
+        return straatnaam;
+    }
+
+    public void setStraatnaam(String straatnaam) {
+        this.straatnaam = straatnaam;
+    }
+
+    public String getHuisnummer() {
+        return huisnummer;
+    }
+
+    public void setHuisnummer(String huisnummer) {
+        this.huisnummer = huisnummer;
+    }
+
+    public String getPlaatsnaam() {
+        return plaatsnaam;
+    }
+
+    public void setPlaatsnaam(String plaatsnaam) {
+        this.plaatsnaam = plaatsnaam;
     }
 }
