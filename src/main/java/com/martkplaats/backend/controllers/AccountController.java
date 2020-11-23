@@ -21,12 +21,18 @@ public class AccountController {
 
     @PostMapping("/login")
     User login(@RequestBody Account accountFromFront) {
-        Account account = accountRepository.findByUsername(accountFromFront.getUsername());
-        // TODO: Check username and password
-        if (account == null) {
+        Account accountFromDB = accountRepository.findByUsername(accountFromFront.getUsername());
+        if (accountFromDB == null) {
             return new User();
         } else {
-            return account.getUser();
+            // Check if password matches the username
+            if (accountFromFront.getPassword().equals(accountFromDB.getPassword())) {
+                return accountFromDB.getUser();
+            } else {
+                return new User();
+                // TODO: Wrong password action here:
+                //  Right now just an empty user return for username and password failure.
+            }
         }
     }
 }
