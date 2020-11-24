@@ -32,16 +32,6 @@ public class User {
     @JsonManagedReference(value = "buyer")
     List<Chat> chatsBuyer = new ArrayList<Chat>();
 
-    public User(String firstName, String surname, String email, String telephone,
-                Double latitude, Double longitude) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.email = email;
-        this.telephone = telephone;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
     public User() {
 
     }
