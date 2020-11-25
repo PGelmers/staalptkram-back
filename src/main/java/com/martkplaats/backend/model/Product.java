@@ -99,4 +99,14 @@ public class Product {
     public void addImage(Image image){
         this.images.add(image);
     }
+
+    public boolean deleteImage(Image image){
+        for( Image im : this.images){
+            if (im == image){
+                this.images.remove(im);
+                return true;
+            }
+        }
+        return false;
+    }
 }
