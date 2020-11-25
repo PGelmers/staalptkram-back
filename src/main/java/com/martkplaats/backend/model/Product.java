@@ -1,7 +1,5 @@
 package com.martkplaats.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ public class Product {
     @Column(name = "description", columnDefinition = "VARCHAR", length = 10_000_000)
     private String description;
     private Category category;
+    private Double latitude;
+    private Double longitude;
 
     @OneToMany
     @OrderColumn(name = "pos")
@@ -26,11 +26,13 @@ public class Product {
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
-    public Product(String title, Double price, String description, Category category) {
+    public Product(String title, Double price, String description, Category category, Double latitude, Double longitude) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.category = category;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Product() {
@@ -97,17 +99,33 @@ public class Product {
         this.images = images;
     }
 
-    public void addImage(Image image){
+    public void addImage(Image image) {
         this.images.add(image);
     }
 
-    public boolean deleteImage(Image image){
-        for( Image im : this.images){
-            if (im == image){
+    public boolean deleteImage(Image image) {
+        for (Image im : this.images) {
+            if (im == image) {
                 this.images.remove(im);
                 return true;
             }
         }
         return false;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
