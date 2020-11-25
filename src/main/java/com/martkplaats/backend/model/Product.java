@@ -14,6 +14,7 @@ public class Product {
 
     private String title;
     private double price;
+    @Column(name = "description", columnDefinition = "VARCHAR", length = 10_000_000)
     private String description;
     private Category category;
 
