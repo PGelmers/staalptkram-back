@@ -34,5 +34,5 @@ public enum Category {
     WCS,
     XBOX,
     YOGHURT,
-    ZONNESCHERM
+    ZONNESCHERMEN
 }
