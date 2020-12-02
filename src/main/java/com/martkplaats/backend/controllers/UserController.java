@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    public UserRepository userRepository;
 
     @PostMapping("/user")
     public User save(@RequestBody User user) {
@@ -27,4 +27,10 @@ public class UserController {
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam(name = "name", defaultValue = "World") String name){
+        return String.format("Hello, %s", name);
+    }
+
 }

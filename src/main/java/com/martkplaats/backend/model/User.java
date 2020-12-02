@@ -19,9 +19,6 @@ public class User {
     private String telephone;
     private Double latitude;
     private Double longitude;
-    private String straatnaam;
-    private String huisnummer;
-    private String plaatsnaam;
     private LocalDate registration = LocalDate.now();
 
     @OneToMany(mappedBy = "userSeller", fetch = FetchType.EAGER)
@@ -36,6 +33,12 @@ public class User {
 
     }
 
+    public User(int id, String firstName, String surname) {
+        this.id = id;
+        this.firstName = firstName;
+        this.surname = surname;
+    }
+
     public List<Chat> getChatsSeller() {
         return chatsSeller;
     }
@@ -43,14 +46,6 @@ public class User {
     public void setChatsSeller(List<Chat> chatsSeller) {
         this.chatsSeller = chatsSeller;
     }
-
-//    public List<Chat> getChatsBuyer() {
-//        return chatsBuyer;
-//    }
-//
-//    public void setChatsBuyer(List<Chat> chatsBuyer) {
-//        this.chatsBuyer = chatsBuyer;
-//    }
 
     public int getId() {
         return id;
@@ -114,29 +109,5 @@ public class User {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getStraatnaam() {
-        return straatnaam;
-    }
-
-    public void setStraatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
-    }
-
-    public String getHuisnummer() {
-        return huisnummer;
-    }
-
-    public void setHuisnummer(String huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-
-    public String getPlaatsnaam() {
-        return plaatsnaam;
-    }
-
-    public void setPlaatsnaam(String plaatsnaam) {
-        this.plaatsnaam = plaatsnaam;
     }
 }
